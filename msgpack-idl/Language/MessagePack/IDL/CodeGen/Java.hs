@@ -75,7 +75,10 @@ package #{configPackage};
 
 #{hashMapImport}
 #{arrayListImport}
+import org.msgpack.MessagePack;
+import org.msgpack.annotation.Message;
 
+@Message
 public class #{formatClassNameT msgName} #{params} {
 
 #{LT.concat $ map genDecl resolvedMsgFields}
@@ -125,8 +128,11 @@ genException alias Config{..} MPException{..} = do
   LT.writeFile ( (formatClassName $ T.unpack excName) ++ ".java") $ templ configFilePath [lt|
 package #{configPackage};
 
-public class #{formatClassNameT excName} #{params}{
+import org.msgpack.MessagePack;
+import org.msgpack.annotation.Message;
 
+@Message
+public class #{formatClassNameT excName} #{params}{
 #{LT.concat $ map genDecl excFields}
   public #{formatClassNameT excName}() {
   #{LT.concat $ map genInit excFields}
