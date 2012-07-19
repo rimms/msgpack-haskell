@@ -27,9 +27,10 @@ generate :: Config -> Spec -> IO()
 generate config spec = do
   let typeAlias = map genAlias $ filter isMPType spec
       dirName = joinPath $ map LT.unpack $ LT.split (== '.') $ LT.pack $ configPackage config
-
+      originalTypes = Prelude.concatMap extractType spec 
+      resolvedTypes = map (resolveTypeAlias typeAlias) $ unique  $ Prelude.concatMap extractTypeFromType originalTypes
   createDirectoryIfMissing True dirName
-  mapM_ (genTuple config) $ filter isTuple $ concat $ map extractType spec 
+  mapM_ (genTuple config) resolvedTypes
   mapM_ (genClient typeAlias config) spec
   mapM_ (genStruct typeAlias config) spec
   mapM_ (genException typeAlias config) spec
@@ -43,6 +44,11 @@ package #{configPackage}
 |]
 --}
 
+unique :: (Eq a) => [a] -> [a]
+unique [] = []
+unique (x:xs)
+  | x `elem` xs = unique xs
+  | otherwise   = x : unique xs
 
 genTuple :: Config -> Type -> IO()
 genTuple Config{..} (TTuple typeList ) = do
@@ -87,7 +93,6 @@ extractTypeFromType x@(TMap s t)    = [x] ++ extractTypeFromType s ++ extractTyp
 extractTypeFromType x@(TTuple ts)   = [x] ++ Prelude.concatMap extractTypeFromType ts
 extractTypeFromType x@(TUserDef _ ts) = [x] ++ Prelude.concatMap extractTypeFromType ts
 extractTypeFromType x = [x]
-
 
 genImport :: FilePath -> Decl -> LT.Text
 genImport packageName MPMessage {..} = 
