@@ -43,6 +43,7 @@ library
                        Language.MessagePack.IDL.CodeGen.Php
                        Language.MessagePack.IDL.CodeGen.Python
                        Language.MessagePack.IDL.CodeGen.Ruby
+                       Language.MessagePack.IDL.CodeGen.Erlang
                        Language.MessagePack.IDL.Internal
                        Language.MessagePack.IDL.Parser
                        Language.MessagePack.IDL.Syntax
@@ -53,7 +54,7 @@ executable mpidl
 
   build-depends:       base      == 4.*
                      , directory >= 1.0 && < 1.2
-                     , cmdargs   == 0.9.*
+                     , cmdargs   == 0.10.*
                      , peggy     == 0.3.*
                      , msgpack-idl
 
