@@ -1,13 +1,13 @@
-name:                msgpack-idl
-version:             0.2.0
-synopsis:            An IDL Compiler for MessagePack
-description:         An IDL Compiler for MessagePack <http://msgpack.org/>
-homepage:            http://msgpack.org/
+name:                msgpack-idl-test
+version:             0.1.0
+synopsis:            Unittest Generator of MessagePack-IDL
+description:         Unittest Generator of MessagePack-IDL <https://github.com/msgpack/msgpack-haskell/tree/master/msgpack-idl>
+homepage:            https://github.com/msgpack/msgpack-haskell/tree/master/msgpack-idl
 license:             BSD3
 license-file:        LICENSE
-author:              
-maintainer:          
-copyright:           Copyright (c) 2011, Hideyuki Tanaka
+author:              Kenta OONO
+maintainer:          Kenta OONO <oono@preferrerd.jp>
+copyright:           Copyright (c) 2012, Kenta OONO
 category:            Language
 stability:           Experimental
 cabal-version:       >=1.8
@@ -17,7 +17,7 @@ extra-source-files:  mpidl.peggy
 
 source-repository head
   type:                git
-  location:            git://github.com/msgpack/msgpack-haskell.git
+  location:            https://github.com/msgpack/msgpack-haskell/tree/master/msgpack-idl
 
 library
   build-depends:       base             == 4.*
