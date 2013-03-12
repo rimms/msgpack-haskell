@@ -241,6 +241,9 @@ genClient MPService {..} = [lt|
 class #{capitalizeT serviceName}
   def initialize(host, port)
     @cli = MessagePack::RPC::Client.new(host, port)
+  end
+  def get_client
+    @cli
   end#{LT.concat $ map genMethodCall serviceMethods}
 end
 |]
