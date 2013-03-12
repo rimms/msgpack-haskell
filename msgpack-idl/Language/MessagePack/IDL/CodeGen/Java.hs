@@ -218,6 +218,10 @@ public class #{className} {
   }
 
 #{LT.concat $ map genMethodCall resolvedServiceMethods}
+  public Client get_client() {
+    return c_;
+  }
+
   private Client c_;
   private RPCInterface iface_;
 };
