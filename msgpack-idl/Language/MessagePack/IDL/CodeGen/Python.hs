@@ -104,6 +104,9 @@ class #{serviceName}:
   def __init__ (self, host, port):
     address = msgpackrpc.Address(host, port)
     self.client = msgpackrpc.Client(address)
+
+  def get_client(self):
+    return self.client
 #{LT.concat $ map genMethodCall serviceMethods}
 |]
   where
